@@ -3,24 +3,12 @@ $(document).ready(function() {
   // connect to Flask socket
   var socket = io.connect("http://" + document.domain + ":" + location.port);
 
-  // when calendar event sent
-  socket.on('calendar', function(msg) {
-    ;
-  });
-
-  // update water day display
-  socket.on('water', function(msg) {
-    ;
-  })
-
-  // when sheet event sent
-  socket.on('sheets', function(msg) {
-    // console.log("sheets", msg);
-    ;
-  });
-
-  socket.on('trello', function(msg) {
-    ;
+  socket.on('meta', function(msg) {
+    console.log(msg['oldest-cr-date']);
+    $('#meta-1').html("Oldest Created: " + msg['oldest-cr-date']);
+    $('#meta-2').html(msg['oldest-cr-rel'] + " days ago");
+    $('#meta-3').html("Oldest Updated: " + msg['oldest-up-date']);
+    $('#meta-4').html(msg['oldest-up-rel'] + " days ago");
   });
 
   // when itr event sent
